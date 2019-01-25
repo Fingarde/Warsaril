@@ -26,7 +26,6 @@ public class Main extends JavaPlugin
 
     public void onEnable()
     {
-
         logger = getLogger();
         instance = this;
 
@@ -55,14 +54,13 @@ public class Main extends JavaPlugin
 
     private void registerCommands()
     {
-
         getCommand("spawn").setExecutor(new Spawn());
         getCommand("setspawn").setExecutor(new SetSpawn());
     }
 
     private void registerEvents()
     {
-      registerEvent(new MovementEvent());
+        registerEvent(new MovementEvent());
     }
 
     private void registerEvent(Listener Class)
