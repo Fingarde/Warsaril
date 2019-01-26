@@ -19,10 +19,7 @@ public class Warp implements CommandExecutor
 {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        if (!(sender instanceof Player)) {
-            sender.sendMessage("warp command can only be used by player");
-            return false;
-        }
+        if (!(sender instanceof Player)) { sender.sendMessage("warp command can only be used by player"); return false; }
 
         Player player = (Player) sender;
 
@@ -78,8 +75,8 @@ public class Warp implements CommandExecutor
                 return false;
             }
 
-
-        } catch (SQLException e) {
+        } catch (SQLException e)
+        {
             player.sendMessage(Main.prefix + ChatColor.RED + "Une erreur s'est produite");
             e.printStackTrace();
         }
