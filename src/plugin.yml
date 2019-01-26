@@ -1,0 +1,12 @@
+name: Warsaril
+main: fr.fingarde.warsaril.Main
+author: Fingarde
+version: 1.0
+api-version: 1.13
+database: true
+description: Plugin for Warsaril MMO RPG
+commands:
+  setspawn:
+    description: Set spawn
+  spawn:
+    description: Teleport to spawn

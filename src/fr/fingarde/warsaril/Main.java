@@ -5,6 +5,7 @@ import com.zaxxer.hikari.HikariDataSource;
 import fr.fingarde.warsaril.commands.SetSpawn;
 import fr.fingarde.warsaril.commands.Spawn;
 import fr.fingarde.warsaril.listeners.MovementEvent;
+import org.bukkit.ChatColor;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -13,8 +14,7 @@ import java.util.logging.Logger;
 public class Main extends JavaPlugin
 {
 
-    private final String DataBaseAdress = "localhost:3306";
-    private final String DataBase = "warsaril";
+    public static final String prefix = ChatColor.GRAY + "[" + ChatColor.YELLOW + "Warsaril" + ChatColor.GRAY + "] " + ChatColor.RESET;
 
     private static Main instance;
     private static Logger logger;
@@ -35,6 +35,24 @@ public class Main extends JavaPlugin
         registerCommands();
     }
 
+    /* ================================ GETTER ================================ */
+
+    public static HikariDataSource getDataSource() {
+        return dataSource;
+    }
+
+    public static Logger getLog() {
+        return logger;
+    }
+
+    public static Main getInstance() {
+        return instance;
+    }
+
+    public static String noPermission(String cmd)
+    {
+        return ChatColor.RED + "Vous n'avez pas la permisison de faire " + ChatColor.BOLD + "/" + cmd;
+    }
 
     /* ================================ FUNCTIONS ================================ */
 
@@ -42,20 +60,21 @@ public class Main extends JavaPlugin
     {
         HikariConfig config = new HikariConfig();
 
-        config.setJdbcUrl( "jdbc:mysql://" + DataBaseAdress+ "/" + DataBase );
+        config.addDataSourceProperty("serverName", "localhost");
+        config.addDataSourceProperty("port", 3306);
+        config.addDataSourceProperty("databaseName", "warsaril");
+        config.addDataSourceProperty("user", "admin");
+        config.addDataSourceProperty("password", "test");
 
-        config.setUsername("admin");
-        config.setPassword("test");
-
-        config.setDriverClassName("com.mysql.jdbc.Driver");
+        config.setDataSourceClassName("com.mysql.jdbc.jdbc2.optional.MysqlDataSource");
 
         dataSource = new HikariDataSource( config );
     }
 
     private void registerCommands()
     {
-        getCommand("spawn").setExecutor(new Spawn());
         getCommand("setspawn").setExecutor(new SetSpawn());
+        getCommand("spawn").setExecutor(new Spawn());
     }
 
     private void registerEvents()
