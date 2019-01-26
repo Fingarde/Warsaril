@@ -44,7 +44,7 @@ public class Warp implements CommandExecutor
 
                 String[] xyz = rs.getString("xyz").split(",");
 
-                Location loc = new Location(Bukkit.getWorld(rs.getString("world")), Integer.valueOf(xyz[0]) + 0.5, Integer.valueOf(xyz[1]) + 0.5, Integer.valueOf(xyz[2]) + 0.5);
+                Location loc = new Location(Bukkit.getWorld(rs.getString("world")), Float.valueOf(xyz[0]), Float.valueOf(xyz[1]), Float.valueOf(xyz[2]));
 
                 warps.put(name, loc);
 
@@ -57,6 +57,7 @@ public class Warp implements CommandExecutor
             {
                 warpList += ", " + warp.getKey();
             }
+
             warpList = warpList.substring(2);
 
             if(args.length == 0) {

@@ -28,7 +28,7 @@ public class SetSpawn implements CommandExecutor
             String worldName = player.getWorld().getName();
 
             Location playerLocation = player.getLocation();
-            String xyz = playerLocation.getBlockX() + "," + playerLocation.getBlockY() + "," + playerLocation.getBlockZ();
+            String xyz = (playerLocation.getBlockX() + 0.5) + "," + (playerLocation.getBlockY() + 0.2) + "," + (playerLocation.getBlockZ() + 0.5);
 
             Connection sql = Main.getDataSource().getConnection();
             ResultSet rs = sql.prepareStatement("SELECT * FROM warps WHERE type = 'spawn' and name = 'spawn'").executeQuery();
@@ -38,7 +38,7 @@ public class SetSpawn implements CommandExecutor
                 sql.prepareStatement("INSERT INTO warps (name, type, world, xyz) VALUES ('spawn', 'spawn', '" + worldName + "', '" + xyz + "')").execute();
             }else
             {
-                sql.prepareStatement("UPDATE warps SET world = '" + worldName + "', xyz = '" + xyz + "' WHERE (`name`='spawn') AND (`type`='spawn') LIMIT 1").execute();
+                sql.prepareStatement("UPDATE warps SET world = '" + worldName + "', xyz = '" + xyz + "' WHERE (name='spawn') AND (type='spawn') LIMIT 1").execute();
             }
 
             player.sendMessage(Main.prefix + ChatColor.GREEN + "Le spawn a été defini");
