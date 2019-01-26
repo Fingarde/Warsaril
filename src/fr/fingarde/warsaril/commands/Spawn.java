@@ -22,7 +22,7 @@ public class Spawn implements CommandExecutor
 
         Player player = (Player) sender;
 
-        if((!player.isOp()) && (!player.hasPermission("warsaril.spawn"))) { player.sendMessage(Main.noPermission(label)); return false;}
+        if(!player.hasPermission("warsaril.spawn")) { player.sendMessage(Main.noPermission(label)); return false;}
 
         try
         {

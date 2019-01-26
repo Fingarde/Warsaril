@@ -1,5 +1,7 @@
 .idea/
 
+out/
+
 .libs/
 
 Warsaril.iml

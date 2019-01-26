@@ -4,6 +4,7 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import fr.fingarde.warsaril.commands.SetSpawn;
 import fr.fingarde.warsaril.commands.Spawn;
+import fr.fingarde.warsaril.commands.Warp;
 import fr.fingarde.warsaril.listeners.MovementEvent;
 import org.bukkit.ChatColor;
 import org.bukkit.event.Listener;
@@ -65,6 +66,8 @@ public class Main extends JavaPlugin
         config.addDataSourceProperty("databaseName", "warsaril");
         config.addDataSourceProperty("user", "admin");
         config.addDataSourceProperty("password", "test");
+        config.addDataSourceProperty("useSSL", false);
+        config.addDataSourceProperty("autoReconnect", true);
 
         config.setDataSourceClassName("com.mysql.jdbc.jdbc2.optional.MysqlDataSource");
 
@@ -75,6 +78,7 @@ public class Main extends JavaPlugin
     {
         getCommand("setspawn").setExecutor(new SetSpawn());
         getCommand("spawn").setExecutor(new Spawn());
+        getCommand("warp").setExecutor(new Warp());
     }
 
     private void registerEvents()

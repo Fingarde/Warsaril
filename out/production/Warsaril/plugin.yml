@@ -10,3 +10,5 @@ commands:
     description: Set spawn
   spawn:
     description: Teleport to spawn
+  warp:
+      description: Warps teleportation command

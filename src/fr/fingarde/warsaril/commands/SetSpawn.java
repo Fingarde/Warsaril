@@ -21,7 +21,7 @@ public class SetSpawn implements CommandExecutor
 
         Player player = (Player) sender;
 
-        if((!player.isOp()) && (!player.hasPermission("warsaril.setSpawn"))) { player.sendMessage(Main.noPermission(label)); return false;}
+        if(!player.hasPermission("warsaril.setSpawn")) { player.sendMessage(Main.noPermission(label)); return false;}
 
         try
         {
@@ -33,7 +33,7 @@ public class SetSpawn implements CommandExecutor
             Connection sql = Main.getDataSource().getConnection();
             ResultSet rs = sql.prepareStatement("SELECT * FROM warps WHERE type = 'spawn' and name = 'spawn'").executeQuery();
 
-            if(! rs.next())
+            if(!rs.next())
             {
                 sql.prepareStatement("INSERT INTO warps (name, type, world, xyz) VALUES ('spawn', 'spawn', '" + worldName + "', '" + xyz + "')").execute();
             }else
